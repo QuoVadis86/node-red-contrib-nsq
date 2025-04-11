@@ -10,6 +10,7 @@
       maxInFlight: { value: 1, required: true, validate: RED.validators.number() },
       maxAttempts: { value: 0, required: true, validate: RED.validators.number() }
     },
+    inputs: 1,
     outputs: 1,
     icon: "feed.png",
     label: function () {
@@ -25,11 +26,11 @@
     </div>
     <div class="form-row">
         <label for="node-input-topic"><i class="icon-tag"></i> Topic</label>
-        <input type="text" id="node-input-topic" placeholder="importantStuff">
+        <input type="text" id="node-input-topic" placeholder="topic">
     </div>
     <div class="form-row">
         <label for="node-input-channel"><i class="icon-tag"></i> Channel</label>
-        <input type="text" id="node-input-channel" placeholder="node-red">
+        <input type="text" id="node-input-channel" placeholder="default">
     </div>
     <div class="form-row">
         <label for="node-input-finishImmediately"><i class="icon-check"></i> Finish Immediately</label>
@@ -48,7 +49,10 @@
 <script type="text/x-red" data-help-name="nsq-consumer">
     <p>The consumer node subscribes to an NSQ topic on a channel.</p>
     <p>Checking "Finish Immediately" will automatically "ack" your messages. Otherwise, you must either <code>finish</code>, <code>touch</code>, or <code>requeue</code> the message before <code>msg._nsq.timeout</code> seconds.
-
+    <p>
+        The consumer node subscribes to an NSQ topic on a channel and outputs received messages.
+        It can also accept input messages to dynamically override the <code>msg.topic</code> and <code>msg.channel</code>.
+    </p>
     <h3>Options</h3>
     <dl class="message-properties">
       <dt class="required">topic <span class="property-type">string</span></dt>
